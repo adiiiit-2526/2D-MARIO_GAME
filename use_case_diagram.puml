@@ -1,0 +1,94 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Define Actors
+actor "Player 1" as P1
+actor "Player 2" as P2
+actor "Time Trigger\n(Timer)" as TT1
+actor "Storage\n(Local Storage)" as Storage
+actor "Administrator" as Admin
+actor "Time Trigger\n(Timer)" as TT2
+
+' System Boundary
+rectangle "2D Mario Style Multiplayer Game" {
+    
+    ' Blue Use Cases
+    usecase "Create\nMultiplayer Game" as UC_Create #dae8fc
+    usecase "Join\nMultiplayer Game" as UC_Join #dae8fc
+    
+    ' Purple Use Cases
+    usecase "Select Character" as UC_Select #e1d5e7
+    usecase "Start Game" as UC_Start #e1d5e7
+    
+    ' Green Use Cases
+    usecase "Move\nCharacter" as UC_Move #d5e8d4
+    usecase "Jump" as UC_Jump #d5e8d4
+    usecase "Attack\nEnemy" as UC_Attack #d5e8d4
+    usecase "Collect\nCoin" as UC_Coin #d5e8d4
+    usecase "Collect\nPower-Up" as UC_PowerUp #d5e8d4
+    usecase "Defeat\nEnemy" as UC_Defeat #d5e8d4
+    usecase "Complete\nLevel" as UC_Complete #d5e8d4
+    usecase "Save\nProgress" as UC_Save #d5e8d4
+    
+    ' Yellow Use Cases
+    usecase "Pause Game" as UC_Pause #fff2cc
+    usecase "Leave Game" as UC_Leave #fff2cc
+    usecase "View Score" as UC_Score #fff2cc
+    usecase "View Leaderboard" as UC_Leaderboard #fff2cc
+    usecase "Synchronize\nGame State" as UC_Sync #fff2cc
+    usecase "Synchronize\nGame State\n(Periodic)" as UC_SyncPeriodic #fff2cc
+
+    ' Pink Use Cases
+    usecase "Manage Players" as UC_MngPlayers #f8cecc
+    usecase "Manage Levels" as UC_MngLevels #f8cecc
+}
+
+' ================= Actor Associations =================
+
+' Player 1
+P1 -- UC_Create
+P1 -- UC_Select
+P1 -- UC_Start
+P1 -- UC_Move
+
+' Player 2
+P2 -- UC_Join
+P2 -- UC_Select
+P2 -- UC_Start
+P2 -- UC_Move
+
+' Administrator
+Admin -- UC_MngPlayers
+Admin -- UC_MngLevels
+
+' Time Triggers & Storage
+TT1 -- UC_Complete
+UC_Save -- Storage
+UC_SyncPeriodic -- TT2
+
+' ================= Includes =================
+UC_Create ..> UC_Select : <<include>>
+UC_Join ..> UC_Select : <<include>>
+UC_Select ..> UC_Start : <<include>>
+UC_Complete ..> UC_Save : <<include>>
+UC_Sync ..> UC_SyncPeriodic : <<include>>
+
+' ================= Extends =================
+UC_Jump ..> UC_Move : <<extend>>
+UC_Defeat ..> UC_Attack : <<extend>>
+UC_PowerUp ..> UC_Coin : <<extend>>
+
+' ================= Start Game Associations =================
+UC_Start -- UC_Move
+UC_Start -- UC_Jump
+UC_Start -- UC_Attack
+UC_Start -- UC_Coin
+UC_Start -- UC_PowerUp
+UC_Start -- UC_Pause
+UC_Start -- UC_Leave
+UC_Start -- UC_Score
+UC_Start -- UC_Leaderboard
+UC_Start -- UC_Sync
+
+@enduml
