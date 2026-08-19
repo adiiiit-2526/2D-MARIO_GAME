@@ -1,0 +1,145 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+
+class GameDeveloper {
+  - developerId: String
+  - name: String
+  - email: String
+  --
+  + createProject(name: String, location: String): GameProject
+  + openProject(project: GameProject): void
+  + addGameObject(scene: Scene, type: String): GameObject
+  + addComponent(obj: GameObject, comp: Component): void
+  + modifyComponent(comp: Component): void
+  + saveScene(scene: Scene): void
+  + runGame(project: GameProject): void
+  + stopGame(): void
+  + fixErrors(messages: List<String>): void
+}
+
+class GameDesigner {
+  - designerId: String
+  - name: String
+  - email: String
+  --
+  + designObjectTypes(): void
+  + defineObjectProperties(): void
+  + collaborateOnObjects(scene: Scene): void
+}
+
+class GameTesterPlayer {
+  - testerId: String
+  - name: String
+  - email: String
+  --
+  + playGame(project: GameProject): void
+  + interactWithGame(): void
+  + reportIssue(description: String): void
+}
+
+class GameEngineSystem {
+  - version: String
+  - isRunning: boolean
+  --
+  + createProject(name: String, location: String): GameProject
+  + validateProject(project: GameProject): Boolean
+  + openProject(project: GameProject): void
+  + createScene(project: GameProject, name: String): Scene
+  + createGameObject(scene: Scene, type: String): GameObject
+  + updateObject(obj: GameObject): void
+  + loadAssets(project: GameProject): boolean
+  + initializeGameObjects(scene: Scene): void
+  + startGame(): void
+  + processInput(): void
+  + processPhysics(): void
+  + processCollisions(): void
+  + render(): void
+  + stopGame(): void
+  + reportError(message: String): void
+}
+
+class GameProject {
+  - projectId: String
+  - name: String
+  - location: String
+  - createdDate: Date
+  - lastModified: Date
+  --
+  + addScene(scene: Scene): void
+  + removeScene(scene: Scene): void
+  + getScenes(): List<Scene>
+  + addAsset(asset: Asset): void
+  + removeAsset(asset: Asset): void
+  + getAssets(): List<Asset>
+  + validate(): boolean
+  + open(): void
+}
+
+class Scene {
+  - sceneId: String
+  - name: String
+  - backgroundColor: String
+  - isSaved: boolean
+  - lastModified: Date
+  --
+  + addGameObject(obj: GameObject): void
+  + removeGameObject(obj: GameObject): void
+  + getGameObjects(): List<GameObject>
+  + save(): void
+  + load(): void
+}
+
+class GameObject {
+  - objectId: String
+  - name: String
+  - type: String
+  - positionX: float
+  - positionY: float
+  - width: float
+  - height: float
+  - isActive: boolean
+  --
+  + setPosition(x: float, y: float): void
+  + setSize(w: float, h: float): void
+  + addComponent(comp: Component): void
+  + removeComponent(comp: Component): void
+  + getComponents(): List<Component>
+  + update(): void
+}
+
+class Component {
+  - componentId: String
+  - type: String
+  - isEnabled: boolean
+  --
+  + setEnabled(enabled: boolean): void
+  + isEnabled(): boolean
+  + update(): void
+}
+
+class Asset {
+  - assetId: String
+  - name: String
+  - type: String
+  - path: String
+  - size: long
+  --
+  + load(): boolean
+  + unload(): void
+  + isLoaded(): boolean
+}
+
+GameDeveloper "1" -- "*" GameEngineSystem : uses
+GameDesigner "1" -- "*" GameEngineSystem : uses
+GameTesterPlayer "1" -- "*" GameEngineSystem : uses / interacts with
+
+GameEngineSystem "1" -- "0..*" GameProject : manages
+GameEngineSystem "1" -- "0..*" Asset : loads
+
+GameProject "1" *-- "0..*" Scene : contains
+GameProject "1" *-- "0..*" Asset : contains (owns)
+Scene "1" *-- "0..*" GameObject : contains
+GameObject "1" *-- "0..*" Component : has
+
+@enduml

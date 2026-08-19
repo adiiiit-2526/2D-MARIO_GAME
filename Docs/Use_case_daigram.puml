@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam backgroundColor #121212
+skinparam defaultTextColor #ffffff
+skinparam ArrowColor #a0a0a0
+
+skinparam actor {
+  BackgroundColor #2d3748
+  BorderColor #63b3ed
+  FontColor #ffffff
+}
+
+skinparam usecase {
+  BackgroundColor #1f2937
+  BorderColor #4b5563
+  FontColor #ffffff
+}
+
+skinparam rectangle {
+  BackgroundColor #121212
+  BorderColor #ffffff
+  FontColor #ffffff
+}
+
+actor "Developer / Learner" as dev
+actor "File System / Build Tool" as fs
+
+rectangle "2D Game Engine" {
+  usecase "Configure Engine\nArchitecture" as UC1 #1e293b
+  usecase "Setup Engine & Render" as UC2 #3b2447
+  usecase "Initialize Asset Manager" as UC3 #1a3826
+  usecase "Load Texture Assets" as UC4 #1a3826
+  usecase "Manage Physics" as UC5 #422d13
+  usecase "Debug Physics Collisions" as UC6 #422d13
+  usecase "Use Level Editor Tool" as UC7 #422d13
+}
+
+dev --> UC1
+dev --> UC2
+dev --> UC3
+dev --> UC5
+dev --> UC7
+
+UC3 ..> UC4 : <<include>>
+UC6 ..> UC5 : <<extend>>\nCondition:\n{isDebugMode == true}
+
+UC4 -- fs
+@enduml

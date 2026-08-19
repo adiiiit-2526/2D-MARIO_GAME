@@ -1,0 +1,135 @@
+@startuml
+skinparam objectAttributeIconSize 0
+
+note top
+Scenario: Developer "Abhyam" creates and runs a game project
+named "SpaceAdventure". The project has one scene "Level1"
+with two game objects (Player and Enemy) and their components.
+The project uses two assets (player sprite and background).
+end note
+
+object "dev1: GameDeveloper" as dev1 {
+  developerId = "DEV001"
+  name = "Abhyam"
+  email = "abhyam@example.com"
+}
+
+object "engine1: GameEngineSystem" as engine1 {
+  version = "1.0.0"
+  isRunning = false
+}
+
+object "designer1: GameDesigner" as designer1 {
+  designerId = "DES001"
+  name = "Neha"
+  email = "neha@example.com"
+}
+
+object "tester1: GameTesterPlayer" as tester1 {
+  testerId = "TST001"
+  name = "Rohan"
+  email = "rohan@example.com"
+}
+
+object "project1: GameProject" as project1 {
+  projectId = "PRJ001"
+  name = "SpaceAdventure"
+  location = "C:/Games/SpaceAdventure"
+  createdDate = "2025-05-20"
+  lastModified = "2025-05-21"
+}
+
+object "scene1: Scene" as scene1 {
+  sceneId = "SCN001"
+  name = "Level1"
+  backgroundColor = "#87CEEB"
+  isSaved = true
+  lastModified = "2025-05-21"
+}
+
+object "playerObj: GameObject" as playerObj {
+  objectId = "OBJ001"
+  name = "Player"
+  type = "Player"
+  positionX = 100.0
+  positionY = 250.0
+  width = 64.0
+  height = 64.0
+  isActive = true
+}
+
+object "enemyObj: GameObject" as enemyObj {
+  objectId = "OBJ002"
+  name = "Enemy1"
+  type = "Enemy"
+  positionX = 400.0
+  positionY = 250.0
+  width = 64.0
+  height = 64.0
+  isActive = true
+}
+
+object "asset1: Asset" as asset1 {
+  assetId = "AST001"
+  name = "player.png"
+  type = "Image"
+  path = "Assets/Sprites/player.png"
+  size = 245760
+}
+
+object "asset2: Asset" as asset2 {
+  assetId = "AST002"
+  name = "background.png"
+  type = "Image"
+  path = "Assets/Backgrounds/bg.png"
+  size = 1240000
+}
+
+object "spriteComp1: Component" as spriteComp1 {
+  componentId = "CMP001"
+  type = "SpriteRenderer"
+  isEnabled = true
+}
+
+object "colliderComp1: Component" as colliderComp1 {
+  componentId = "CMP002"
+  type = "Collider"
+  isEnabled = true
+}
+
+object "spriteComp2: Component" as spriteComp2 {
+  componentId = "CMP003"
+  type = "SpriteRenderer"
+  isEnabled = true
+}
+
+object "aiComp1: Component" as aiComp1 {
+  componentId = "CMP004"
+  type = "AIController"
+  isEnabled = true
+}
+
+dev1 "1" -- "1" engine1 : uses
+dev1 "1" -- "1" project1 : creates / owns
+engine1 "1" -- "1" project1 : manages
+
+engine1 "1" -- "1" designer1 : uses
+engine1 "1" -- "1" tester1 : interacts with
+
+project1 "1" -- "1" scene1 : contains
+project1 "1" -- "0..*" asset1 : uses
+project1 "1" -- "0..*" asset2 : uses
+
+engine1 "1" -- "0..*" asset1 : loads
+engine1 "1" -- "0..*" asset2 : loads
+
+scene1 "1" -- "2" playerObj : contains
+scene1 "1" -- "2" enemyObj : contains
+
+playerObj "1" -- "0..*" spriteComp1 : has
+playerObj "1" -- "0..*" colliderComp1 : has
+
+enemyObj "1" -- "0..*" spriteComp2 : has
+enemyObj "1" -- "0..*" aiComp1 : has
+
+@enduml

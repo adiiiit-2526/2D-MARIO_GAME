@@ -1,0 +1,5 @@
+**Problem Statement**
+
+Learning how a game engine works internally is difficult because most available learning resources either rely on high-level commercial engines such as Unity and Unreal Engine, which hide many underlying systems, or provide fragmented tutorials that do not explain how to build a complete engine from scratch. Developers also face challenges in designing modular engine architecture, integrating developer tools for real-time debugging and level editing, and combining third-party libraries such as LWJGL, OpenGL, and Box2D into a single cohesive framework.
+
+**Therefore, the problem is to design and develop a modular custom game engine that clearly separates rendering, simulation, asset management, and gameplay systems while providing integrated developer tooling and unified integration of graphics and physics libraries.** This will help developers gain practical knowledge of game-engine architecture, graphical rendering, systems programming, and engine tooling.
