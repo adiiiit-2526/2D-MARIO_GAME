@@ -6,7 +6,7 @@ Scenario: Developer "Abhyam" creates and runs a game project
 named "SpaceAdventure". The project has one scene "Level1"
 with two game objects (Player and Enemy) and their components.
 The project uses two assets (player sprite and background).
-end note
+end note.
 
 object "dev1: GameDeveloper" as dev1 {
   developerId = "DEV001"
