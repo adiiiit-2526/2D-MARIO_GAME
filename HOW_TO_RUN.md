@@ -28,6 +28,8 @@ If `winget` does not work, download the installer from https://adoptium.net and 
 
 ```
 winget install Gradle.Gradle
+choco install gradle
+scoop install gradle
 ```
 
 Or download it manually from https://gradle.org/install
