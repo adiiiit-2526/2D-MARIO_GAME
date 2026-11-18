@@ -27,10 +27,10 @@ If `winget` does not work, download the installer from https://adoptium.net and 
 ## Step 2: Install Gradle
 install choco first 
 Open cmd as administrator and run this command :
-'''
+```
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
-'''
-Restart the cmd then run this command:
+```
+Restart the cmd then run this command
 ```
 choco install gradle
 ```
