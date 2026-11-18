@@ -25,14 +25,14 @@ winget install EclipseAdoptium.Temurin.17.JDK
 If `winget` does not work, download the installer from https://adoptium.net and install it.
 
 ## Step 2: Install Gradle
-install choco first 
+Install choco 
 Open cmd as administrator and run this command :
 ```
 @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
 ```
 Restart the cmd then run this command
 ```
-choco install gradle
+choco install gradle -y
 ```
 
 Or download it manually from https://gradle.org/install
@@ -53,7 +53,7 @@ Both commands should print a version number.
 **Option A: Git**
 
 ```
-git clone <your-repository-url>
+git clone https://github.com/adiiiit-2526/2D-MARIO_GAME
 ```
 
 **Option B: ZIP**
@@ -73,7 +73,7 @@ Or use `cd`:
 
 ```
 cd Downloads
-cd "project-folder-name"
+cd "2D-MARIO_GAME"
 dir
 ```
 
