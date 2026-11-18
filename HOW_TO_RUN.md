@@ -25,11 +25,14 @@ winget install EclipseAdoptium.Temurin.17.JDK
 If `winget` does not work, download the installer from https://adoptium.net and install it.
 
 ## Step 2: Install Gradle
-
+install choco first 
+Open cmd as administrator and run this command :
+'''
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+'''
+Restart the cmd then run this command:
 ```
-winget install Gradle.Gradle
 choco install gradle
-scoop install gradle
 ```
 
 Or download it manually from https://gradle.org/install
